@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const fundriaserSchema = new mongoose.Schema({
   target: {
@@ -37,4 +37,4 @@ const fundriaserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("transaction", fundriaserSchema);
+export default mongoose.model("transaction", fundriaserSchema);
