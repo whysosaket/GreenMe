@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     min: 6,
     max: 255,
   },
+  avatar: {
+    type: String,
+    default: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+  },
   score: {
     type: Number,
     default: 1000,
@@ -33,23 +37,15 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
-  friends: {
-    type: Array,
-    default: [],
-  },
-  friendRequests: {
-    type: Array,
-    default: [],
-  },
-  friendRequestsSent: {
-    type: Array,
-    default: [],
-  },
   followers: {
     type: Array,
     default: [],
   },
   following: {
+    type: Array,
+    default: [],
+  },
+  stories: {
     type: Array,
     default: [],
   },
