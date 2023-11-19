@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pro_demo/screens/add_post_screen.dart';
 import 'package:pro_demo/screens/demo_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
+import 'package:pro_demo/screens/login_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -20,7 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
     _pages = [
       const ExploreScreen(),
       const DemoScreen(),
-      const DemoScreen(),
+      const LoginScreen(),
       const AddPostScreen(),
     ];
   }
