@@ -60,12 +60,13 @@ const sendStory = async (req: CustomRequest, res: Response) => {
 const forgetStory = async (req: CustomRequest, res: Response) => {
   let success = false;
   let {username, increment} = req.body;
+  let increase=parseInt(increment);
   try {
     const user = await User.findOne({username});
     if (!user) {
       return res.json({ success, error: "User not found!" });
     }
-    user.score += increment;
+    user.score += increase;
     await user.save();
     success = true;
     return res.json({ success, info: "Done!!" });
@@ -85,14 +86,16 @@ const viewStory = async (req: CustomRequest, res: Response) => {
     }
 
     const following = user.following;
-    const storyIDs = await User.find({ _id: { $in: following } }).select(
+    let storyIDs = await User.find({ _id: { $in: following } }).select(
       "stories"
     );
+    storyIDs = storyIDs.map(user => user.stories).flat();
+    
 
     const stories = await Story.find({ _id: { $in: storyIDs } })
       .sort({ createdAt: -1 })
       .limit(10);
-
+    
 
     success = true;
     return res.json({ success, stories });
@@ -107,13 +110,15 @@ const viewStory = async (req: CustomRequest, res: Response) => {
 const likeStory = async (req: CustomRequest, res: Response) => {
   let success = false;
   const { id } = req.user;
+  const storyId= req.body.storyId;
   try {
     const user = await User.findById(id);
     if (!user) {
       return res.json({ success, error: "User not found!" });
     }
 
-    const story = await Story.findById(id);
+    const story = await Story.findById(storyId);
+    
     if (!story) {
       return res.json({ success, error: "Story not found!" });
     }
