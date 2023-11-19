@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/screens/demo_screen.dart';
+import 'package:pro_demo/models/user.dart';
+import 'package:pro_demo/providers/user_provider.dart';
+import 'package:pro_demo/screens/add_post_screen.dart';
+import 'package:pro_demo/screens/explore_screen.dart';
+import 'package:pro_demo/screens/login_screen.dart';
+import 'package:pro_demo/screens/profile_screen.dart';
+import 'package:provider/provider.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -16,10 +22,10 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     _pages = [
-      const DemoScreen(),
-      const DemoScreen(),
-      const DemoScreen(),
-      const DemoScreen(),
+      const ExploreScreen(),
+      const ProfileScreen(),
+      const LoginScreen(),
+      const AddPostScreen(),
     ];
   }
 
@@ -33,26 +39,30 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserProvider>(context, listen: false).setUser(
+      User(
+        name: 'John Doe',
+        image: 'assets/images/user.png',
+        email: 'john.doe@example.com',
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: const Text(
           'Green Me',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color.fromARGB(255, 64, 180, 83),
+        backgroundColor: const Color.fromARGB(255, 243, 255, 232),
         actions: <Widget>[
           Container(
             padding: const EdgeInsets.only(right: 15),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed('/profile-detail');
-              },
-              child: const CircleAvatar(
-                radius: 18,
-                backgroundColor: Color.fromARGB(255, 127, 211, 141),
-                backgroundImage: null,
+            child: IconButton(
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.black,
               ),
+              onPressed: () {},
             ),
           ),
         ],
@@ -60,9 +70,9 @@ class _TabsScreenState extends State<TabsScreen> {
       body: _pages[_selectedPageIndex] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        backgroundColor: const Color.fromARGB(255, 64, 180, 83),
-        unselectedItemColor: const Color.fromARGB(255, 127, 211, 141),
-        selectedItemColor: const Color.fromARGB(255, 243, 255, 232),
+        backgroundColor: const Color.fromARGB(255, 243, 255, 232),
+        unselectedItemColor: const Color.fromARGB(255, 165, 165, 165),
+        selectedItemColor: const Color.fromARGB(255, 64, 180, 83),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         currentIndex: _selectedPageIndex,
@@ -87,7 +97,7 @@ class _TabsScreenState extends State<TabsScreen> {
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(
               Icons.add_circle,
-              color: Color.fromARGB(255, 247, 247, 247),
+              color: Color.fromARGB(255, 64, 180, 83),
               size: 35,
             ),
             activeIcon: const Icon(

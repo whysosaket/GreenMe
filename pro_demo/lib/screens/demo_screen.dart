@@ -5,8 +5,11 @@ class DemoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Demo Screen'),
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 243, 255, 232),
+      body: Center(
+        child: Text('Demo Screen'),
+      ),
     );
   }
 }
