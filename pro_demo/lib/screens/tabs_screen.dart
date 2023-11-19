@@ -4,6 +4,7 @@ import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/add_post_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
 import 'package:pro_demo/screens/leaderboard_screen.dart';
+import 'package:pro_demo/screens/signup_screen.dart';
 import 'package:pro_demo/screens/splash_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
 import 'package:pro_demo/screens/profile_screen.dart';
@@ -63,10 +64,15 @@ class _TabsScreenState extends State<TabsScreen> {
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
               icon: const Icon(
-                Icons.settings,
+                Icons.leaderboard,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+                );
+              },
             ),
           ),
         ],

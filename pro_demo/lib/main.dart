@@ -1,6 +1,9 @@
+import 'dart:io'; // Import this for Platform
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import this for SystemUiOverlayStyle
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/tabs_screen.dart';
+import 'package:pro_demo/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -8,9 +11,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    if (Platform.isAndroid) {
+      const SystemUiOverlayStyle systemUiOverlayStyle =
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
@@ -34,9 +42,12 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
               .copyWith(background: Colors.blueGrey),
         ),
-        initialRoute: '/',
+        home: Consumer<UserProvider>(
+          builder: (context, userProvider, _) {
+            return userProvider.isLoggedIn ? TabsScreen() : LoginScreen();
+          },
+        ),
         routes: {
-          '/': (context) => TabsScreen(),
           TabsScreen.routeName: (ctx) => TabsScreen(),
         },
       ),

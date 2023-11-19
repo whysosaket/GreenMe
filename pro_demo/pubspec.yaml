@@ -64,6 +64,8 @@ flutter:
   assets:
     - assets/
     - assets/images/loginimage.png
+    - assets/images/signupimage.png
+    - assets/images/leaderboard.png
     - assets/images/user.jpeg
     - assets/images/globe_green.svg
     - assets/images/globe_yellow.svg
