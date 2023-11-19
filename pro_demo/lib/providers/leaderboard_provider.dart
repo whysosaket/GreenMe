@@ -19,7 +19,7 @@ class LeaderboardProvider extends ChangeNotifier {
       );
 
       final Map<String, dynamic> responseData = json.decode(response.body);
-      // print(responseData['users']);
+      print(responseData['users']);
       if (responseData['success'] == true) {
         // Assuming you have a Leaderboard.fromJson constructor
         _globalLeaderboard = Leaderboard.fromJson(responseData['users']);

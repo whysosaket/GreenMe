@@ -10,7 +10,7 @@ class UserCardStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    User? user = Provider.of<UserProvider>(context).user;
+    User? user = Provider.of<UserProvider>(context, listen: true).user;
     return SizedBox(
       height: height / 10,
       child: Row(

@@ -4,21 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:pro_demo/widgets/leaderboard/leaderboard_tab.dart';
 import 'package:pro_demo/providers/leaderboard_provider.dart';
 
-// const List<LeaderboardEntry> _leaderboardData = [
-//   LeaderboardEntry(
-//     name: 'Friend 1',
-//     score: 180,
-//   ),
-//   LeaderboardEntry(
-//     name: 'Friend 2',
-//     score: 160,
-//   ),
-//   LeaderboardEntry(
-//     name: 'Friend 3',
-//     score: 140,
-//   ),
-// ];
-
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({Key? key}) : super(key: key);
 
@@ -27,13 +12,27 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
-  bool _dataFetched = false; // Flag to track whether data has been fetched
+  bool _dataFetched = false;
+  List<LeaderboardEntry> global = [];
+
+  @override
+  void initState() {
+    super.initState();
+    LeaderboardProvider leaderboardProvider =
+        Provider.of<LeaderboardProvider>(context, listen: false);
+
+    Future.delayed(Duration.zero).then((value) {
+      leaderboardProvider.getGlobal().then((value) {
+        setState(() {
+          global = value.entries;
+          _dataFetched = true;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    LeaderboardProvider? leaderboardProvider =
-        Provider.of<LeaderboardProvider>(context);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -66,50 +65,30 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         body: TabBarView(
           children: [
             // Global Leaderboard
-            FutureBuilder<Leaderboard>(
-              future: _dataFetched ? null : leaderboardProvider.getGlobal(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  print(snapshot.data);
-                  // No need to cast snapshot.data to List<Map<String, dynamic>>
-                  return const Center(
+            _dataFetched
+                ? Center(
                     child: LeaderboardTab(
-                      leaderboardData: [],
+                      leaderboardData: global,
                     ),
-                  );
-                }
-              },
-            ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
 
             // Friends Leaderboard
             const Center(
               child: LeaderboardTab(
-                leaderboardData: [
-                  {
-                    'name': 'Friend 1',
-                    'profileImage': 'assets/images/user.jpeg',
-                    'score': 180
-                  },
-                  {
-                    'name': 'Friend 2',
-                    'profileImage': 'assets/images/user.jpeg',
-                    'score': 160
-                  },
-                  {
-                    'name': 'Friend 3',
-                    'profileImage': 'assets/images/user.jpeg',
-                    'score': 140
-                  },
-                ],
+                leaderboardData: [],
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

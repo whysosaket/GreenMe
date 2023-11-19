@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/models/leaderboard.dart';
 import 'package:pro_demo/widgets/leaderboard/leaderboard_card.dart';
 
 class LeaderboardTab extends StatelessWidget {
-  final List<Map<String, dynamic>> leaderboardData;
+  final List<LeaderboardEntry> leaderboardData;
 
   const LeaderboardTab({
     Key? key,
@@ -19,9 +20,9 @@ class LeaderboardTab extends StatelessWidget {
           final data = leaderboardData[index];
           print("ssssasdasda");
           return LeaderboardCard(
-            name: data['name'],
-            profileImagePath: data['profileImage'],
-            score: data['score'],
+            name: data.name,
+            profileImagePath: "assets/images/user.jpeg",
+            score: data.score,
           );
         }),
       ),
