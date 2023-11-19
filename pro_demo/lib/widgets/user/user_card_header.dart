@@ -18,10 +18,10 @@ class UserCardHeader extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: const Color.fromARGB(255, 237, 255, 220),
           radius: 30,
-          backgroundImage: AssetImage(user!.image),
+          backgroundImage: AssetImage(user?.image ?? 'assets/images/user.jpeg'),
         ),
         title: Text(
-          user.name,
+          user?.name ?? 'Unknown',
           style: const TextStyle(
             color: Color.fromARGB(255, 34, 34, 34),
             fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class UserCardHeader extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          user.email,
+          user?.email ?? 'Not Found',
           style: const TextStyle(
             color: Color.fromARGB(255, 34, 34, 34),
             fontWeight: FontWeight.bold,

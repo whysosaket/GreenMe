@@ -1,4 +1,4 @@
-import 'line_chart.dart';
+import 'package:pro_demo/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
 
 class StepsCard extends StatelessWidget {
@@ -8,10 +8,9 @@ class StepsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Container(
-      height: height / 4,
+    return SizedBox(
+      height: height / 7,
       width: width,
-      padding: const EdgeInsets.all(8.0),
       child: ListTile(
         leading: const Icon(
           Icons.nordic_walking,
@@ -21,7 +20,7 @@ class StepsCard extends StatelessWidget {
         subtitle: Container(
           padding: const EdgeInsets.all(10),
           width: double.infinity,
-          height: height / 5,
+          height: height / 7,
           child: const LineChartSample2(),
         ),
         title: const Text(

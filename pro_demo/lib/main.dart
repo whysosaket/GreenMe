@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
