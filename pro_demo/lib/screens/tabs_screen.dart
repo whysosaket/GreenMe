@@ -21,6 +21,15 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () async {
+      Provider.of<UserProvider>(context, listen: false).setUser(
+        User(
+          name: 'John Dedoe',
+          image: 'assets/images/user.jpeg',
+          email: 'john.doe@example.com',
+        ),
+      );
+    });
     _pages = [
       const ExploreScreen(),
       const ProfileScreen(),
@@ -39,13 +48,6 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context, listen: false).setUser(
-      User(
-        name: 'John Doe',
-        image: 'assets/images/user.png',
-        email: 'john.doe@example.com',
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/widgets/shopping_card.dart';
 import 'package:pro_demo/widgets/steps_card.dart';
 import 'package:pro_demo/widgets/user_card.dart';
 
@@ -18,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             UserCard(),
             StepsCard(),
+            ShoppingCard(),
           ],
         ),
       ),
