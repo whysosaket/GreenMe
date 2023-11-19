@@ -19,7 +19,7 @@ class _UserCardState extends State<UserCard> {
       height: height / 4,
       width: width,
       padding: const EdgeInsets.all(8.0),
-      child: Column(
+      child: const Column(
         children: [
           UserCardHeader(),
           UserCardStats(),

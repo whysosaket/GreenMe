@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/models/user.dart';
+import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/add_post_screen.dart';
-import 'package:pro_demo/screens/demo_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
 import 'package:pro_demo/screens/profile_screen.dart';
+import 'package:provider/provider.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -37,6 +39,13 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserProvider>(context, listen: false).setUser(
+      User(
+        name: 'John Doe',
+        image: 'assets/images/user.png',
+        email: 'john.doe@example.com',
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

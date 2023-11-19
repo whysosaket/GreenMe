@@ -30,7 +30,6 @@ class UserCardStats extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 243, 255, 232),
                       ),
                       child: const Center(
                         child: Text(
@@ -38,7 +37,7 @@ class UserCardStats extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 20, 85, 53),
+                            color: Colors.white,
                           ),
                         ),
                       ),

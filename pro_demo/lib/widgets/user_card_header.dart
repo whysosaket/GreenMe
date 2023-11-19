@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/models/user.dart';
+import 'package:pro_demo/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class UserCardHeader extends StatelessWidget {
   const UserCardHeader();
@@ -7,33 +10,33 @@ class UserCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
+    User? user = Provider.of<UserProvider>(context).user;
     return SizedBox(
       height: height / 8,
       width: width / 1.1,
-      child: const ListTile(
+      child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 237, 255, 220),
+          backgroundColor: const Color.fromARGB(255, 237, 255, 220),
           radius: 30,
-          backgroundImage: AssetImage('assets/images/user.png'),
+          backgroundImage: AssetImage(user!.image),
         ),
         title: Text(
-          'Rohit Kumar',
-          style: TextStyle(
+          user.name,
+          style: const TextStyle(
             color: Color.fromARGB(255, 34, 34, 34),
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
         ),
         subtitle: Text(
-          'rohitkumar11@gmail.com',
-          style: TextStyle(
+          user.email,
+          style: const TextStyle(
             color: Color.fromARGB(255, 34, 34, 34),
             fontWeight: FontWeight.bold,
             fontSize: 12,
           ),
         ),
-        trailing: CircleAvatar(
+        trailing: const CircleAvatar(
           backgroundColor: Color.fromARGB(255, 237, 255, 220),
           child: IconButton(
             onPressed: null,
