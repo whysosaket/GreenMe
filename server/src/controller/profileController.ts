@@ -26,7 +26,7 @@ const tempConst = async (req: CustomRequest, res: Response) => {
   }
 };
 
-const viewSelfScore = async (req: CustomRequest, res: Response) => {
+const viewSelf = async (req: CustomRequest, res: Response) => {
     let success = false;
     try{
         const { id } = req.user;
@@ -35,14 +35,14 @@ const viewSelfScore = async (req: CustomRequest, res: Response) => {
             return res.json({success, error: "User not found!"});
         }
         success = true;
-        return res.json({success, score: user.score});
+        return res.json({success, user});
     } catch (error) {
         console.log(error);
         return res.json({ error: "Something Went Wrong!" });
     }
 };
 
-const viewOtherScore = async (req: Request, res: Response) => {
+const viewOther = async (req: Request, res: Response) => {
     let success = false;
     try{
         const { userId } = req.body;
@@ -51,11 +51,11 @@ const viewOtherScore = async (req: Request, res: Response) => {
             return res.json({success, error: "User not found!"});
         }
         success = true;
-        return res.json({success, score: user.score});
+        return res.json({success, user});
     } catch (error) {
         console.log(error);
         return res.json({ error: "Something Went Wrong!" });
     }
 }
 
-export { viewSelfScore, viewOtherScore };
+export { viewSelf, viewOther };
