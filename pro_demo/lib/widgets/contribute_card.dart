@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class ContributeCard extends StatelessWidget {
+class ContributeCard extends StatefulWidget {
   String username;
   String imgAddres;
   ContributeCard(this.username, this.imgAddres, {super.key});
 
+  @override
+  State<ContributeCard> createState() => _ContributeCardState();
+  var favorite = false;
+}
+
+class _ContributeCardState extends State<ContributeCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,7 +37,7 @@ class ContributeCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        username,
+                        widget.username,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -51,9 +57,10 @@ class ContributeCard extends StatelessWidget {
               width: 300,
               height: 200,
               color: Colors.grey,
-              child: Image(image: AssetImage(
-                imgAddres,
-              ),),
+              child: Image.asset(
+                widget.imgAddres,
+                fit: BoxFit.cover,
+              ),
             ),
             // Like and Share Buttons
             Row(
@@ -62,17 +69,36 @@ class ContributeCard extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.favorite_border),
+                      icon: Icon(
+                        widget.favorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: widget.favorite ? Colors.red : Colors.grey,
+                      ),
                       onPressed: () {
-                        // Handle like button press
+                        setState(() {
+                          widget.favorite = !widget.favorite;
+                        });
                       },
                     ),
                   ],
                 ),
                 Row(
                   children: [
+                    const Text(
+                      'Fund it!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
                     IconButton(
-                      icon: const Icon(Icons.share),
+                      icon: const Icon(
+                        Icons.monetization_on,
+                        size: 30,
+                        color: Colors.green,
+                      ),
                       onPressed: () {
                         // Handle share button press
                       },

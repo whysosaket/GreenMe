@@ -44,7 +44,8 @@ class MyApp extends StatelessWidget {
         ),
         home: Consumer<UserProvider>(
           builder: (context, userProvider, _) {
-            return userProvider.isLoggedIn ? TabsScreen() : LoginScreen();
+            // return userProvider.isLoggedIn ? TabsScreen() : LoginScreen();
+            return TabsScreen();
           },
         ),
         routes: {

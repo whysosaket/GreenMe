@@ -1,3 +1,4 @@
+import 'package:pro_demo/screens/buying_history_screen.dart';
 import 'package:pro_demo/widgets/items_count.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +22,16 @@ class ShoppingCard extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           width: double.infinity,
           height: height / 7,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              ItemsCount(),
+              const ItemsCount(),
               OutlinedButton(
-                  onPressed: null,
-                  child: Text(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const BuyingHistoryScreen()));
+                  },
+                  child: const Text(
                     "View History",
                     style: TextStyle(fontSize: 11),
                   )),

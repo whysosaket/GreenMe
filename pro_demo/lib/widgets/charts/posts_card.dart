@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class PostsCard extends StatelessWidget {
+class PostsCard extends StatefulWidget {
   String username;
   PostsCard(this.username, {super.key});
 
+  @override
+  State<PostsCard> createState() => _PostsCardState();
+  var favorite = false;
+}
+
+class _PostsCardState extends State<PostsCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,7 +36,7 @@ class PostsCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        username,
+                        widget.username,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -62,9 +68,16 @@ class PostsCard extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.favorite_border),
+                      icon: Icon(
+                        widget.favorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: widget.favorite ? Colors.red : Colors.grey,
+                      ),
                       onPressed: () {
-                        // Handle like button press
+                        setState(() {
+                          widget.favorite = !widget.favorite;
+                        });
                       },
                     ),
                   ],
