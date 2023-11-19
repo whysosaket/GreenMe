@@ -43,6 +43,11 @@ class LoginScreen extends StatelessWidget {
         // Navigate to the home or dashboard screen after successful login
         // Replace '/dashboard' with the actual route for your home/dashboard screen
         Navigator.of(context).pushReplacementNamed('/');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login Success.'),
+          ),
+        );
       } catch (error) {
         // Handle login errors (e.g., show a snackbar)
         ScaffoldMessenger.of(context).showSnackBar(

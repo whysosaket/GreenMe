@@ -15,11 +15,11 @@ class UserCardHeader extends StatelessWidget {
       height: height / 8,
       width: width / 1.1,
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: const Color.fromARGB(255, 237, 255, 220),
+        leading: const CircleAvatar(
+          backgroundColor: Color.fromARGB(255, 237, 255, 220),
           radius: 30,
-          backgroundImage:
-              AssetImage(user?.avatar ?? 'assets/images/user.jpeg'),
+          backgroundImage: AssetImage('assets/images/user.jpeg'),
+          // AssetImage(user?.avatar ?? 'assets/images/user.jpeg'),
         ),
         title: Text(
           user?.name ?? 'Unknown',

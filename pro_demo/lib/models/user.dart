@@ -10,7 +10,6 @@ class User {
   final List<String> followers;
   final List<String> following;
   final List<String> stories;
-  final String anonymousID;
 
   User({
     required this.id,
@@ -24,7 +23,6 @@ class User {
     required this.followers,
     required this.following,
     required this.stories,
-    required this.anonymousID,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -40,7 +38,6 @@ class User {
       followers: List<String>.from(json['followers']),
       following: List<String>.from(json['following']),
       stories: List<String>.from(json['stories']),
-      anonymousID: json['anonymousID'],
     );
   }
 }

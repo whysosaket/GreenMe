@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/models/user.dart';
+import 'package:pro_demo/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class UserCardStats extends StatelessWidget {
   const UserCardStats();
@@ -7,7 +10,7 @@ class UserCardStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
+    User? user = Provider.of<UserProvider>(context).user;
     return SizedBox(
       height: height / 10,
       child: Row(
@@ -31,10 +34,10 @@ class UserCardStats extends StatelessWidget {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          "40",
-                          style: TextStyle(
+                          user?.score.toString() ?? '0',
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
