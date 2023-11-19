@@ -36,6 +36,15 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  void logout() async {
+    _user = null;
+    _token = '';
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
+    await prefs.remove('user');
+    notifyListeners();
+  }
+
   void _saveDataToLocal(String token, Map<String, dynamic> data) async {
     print(data);
     final prefs = await SharedPreferences.getInstance();

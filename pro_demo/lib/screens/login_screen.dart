@@ -37,13 +37,14 @@ class LoginScreen extends StatelessWidget {
       final String password = passwordController.text;
 
       try {
-        await UserProvider().login(username, password);
-        Navigator.of(context).pushReplacementNamed('/');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login Success.'),
-          ),
-        );
+        await UserProvider().login(username, password).then((value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login Success.'),
+            ),
+          );
+          Navigator.of(context).pushReplacementNamed('/tabs-screen');
+        });
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

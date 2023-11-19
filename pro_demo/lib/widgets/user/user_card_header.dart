@@ -3,11 +3,19 @@ import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class UserCardHeader extends StatelessWidget {
-  const UserCardHeader();
+class UserCardHeader extends StatefulWidget {
+  const UserCardHeader({super.key});
 
   @override
+  State<UserCardHeader> createState() => _UserCardHeaderState();
+}
+
+class _UserCardHeaderState extends State<UserCardHeader> {
+  @override
   Widget build(BuildContext context) {
+    setState(() {
+      // user = Provider.of<UserProvider>(context).user;
+    });
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     User? user = Provider.of<UserProvider>(context).user;

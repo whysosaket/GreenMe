@@ -5,6 +5,7 @@ import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/add_post_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
 import 'package:pro_demo/screens/leaderboard_screen.dart';
+import 'package:pro_demo/screens/login_screen.dart';
 import 'package:pro_demo/screens/profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class _TabsScreenState extends State<TabsScreen> {
       if (userDataString != null) {
         final Map<String, dynamic> userData = json.decode(userDataString);
         final User newUser = User.fromJson(userData);
-        print(newUser);
+
         Provider.of<UserProvider>(context, listen: false).setUser(newUser);
       }
     } catch (error) {
@@ -78,6 +79,21 @@ class _TabsScreenState extends State<TabsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                UserProvider().logout();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
             ),
