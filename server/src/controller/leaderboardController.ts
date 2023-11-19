@@ -29,9 +29,11 @@ const tempConst = async (req: CustomRequest, res: Response) => {
 const getGlobalLeaderboard = async (req: Request, res: Response) => {
     let success = false;
     try{
-        const users = await User.find().sort({score: -1});
+        let users = await User.find().sort({score: -1});
+        const simplifiedUsers = users.map(({ name, score }) => ({ name, score }));
+        console.log(simplifiedUsers);
         success = true;
-        return res.json({success, users});
+        return res.json({ success, users: simplifiedUsers });
     } catch (error) {
         console.log(error);
         return res.json({ error: "Something Went Wrong!" });

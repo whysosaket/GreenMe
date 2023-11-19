@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pro_demo/models/user.dart';
+import 'package:pro_demo/providers/leaderboard_provider.dart';
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/tabs_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
@@ -14,6 +15,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => LeaderboardProvider()),
       ],
       child: MyApp(),
     ),

@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/models/leaderboard.dart';
+import 'package:provider/provider.dart';
 import 'package:pro_demo/widgets/leaderboard/leaderboard_tab.dart';
+import 'package:pro_demo/providers/leaderboard_provider.dart';
 
-class LeaderboardScreen extends StatelessWidget {
+// const List<LeaderboardEntry> _leaderboardData = [
+//   LeaderboardEntry(
+//     name: 'Friend 1',
+//     score: 180,
+//   ),
+//   LeaderboardEntry(
+//     name: 'Friend 2',
+//     score: 160,
+//   ),
+//   LeaderboardEntry(
+//     name: 'Friend 3',
+//     score: 140,
+//   ),
+// ];
+
+class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({Key? key}) : super(key: key);
 
   @override
+  _LeaderboardScreenState createState() => _LeaderboardScreenState();
+}
+
+class _LeaderboardScreenState extends State<LeaderboardScreen> {
+  bool _dataFetched = false; // Flag to track whether data has been fetched
+
+  @override
   Widget build(BuildContext context) {
+    LeaderboardProvider? leaderboardProvider =
+        Provider.of<LeaderboardProvider>(context);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -35,39 +63,48 @@ class LeaderboardScreen extends StatelessWidget {
             indicatorPadding: const EdgeInsets.symmetric(horizontal: 16),
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             // Global Leaderboard
-            Center(
-              child: LeaderboardTab(
-                names: [
-                  'John Doe',
-                  'Jane Doe',
-                  'Alice',
-                ],
-                profileImages: [
-                  'assets/images/user.jpeg',
-                  'assets/images/user.jpeg',
-                  'assets/images/user.jpeg',
-                ],
-                scores: [250, 200, 150],
-              ),
+            FutureBuilder<Leaderboard>(
+              future: _dataFetched ? null : leaderboardProvider.getGlobal(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  print(snapshot.data);
+                  // No need to cast snapshot.data to List<Map<String, dynamic>>
+                  return const Center(
+                    child: LeaderboardTab(
+                      leaderboardData: [],
+                    ),
+                  );
+                }
+              },
             ),
 
             // Friends Leaderboard
-            Center(
+            const Center(
               child: LeaderboardTab(
-                names: [
-                  'Friend 1',
-                  'Friend 2',
-                  'Friend 3',
+                leaderboardData: [
+                  {
+                    'name': 'Friend 1',
+                    'profileImage': 'assets/images/user.jpeg',
+                    'score': 180
+                  },
+                  {
+                    'name': 'Friend 2',
+                    'profileImage': 'assets/images/user.jpeg',
+                    'score': 160
+                  },
+                  {
+                    'name': 'Friend 3',
+                    'profileImage': 'assets/images/user.jpeg',
+                    'score': 140
+                  },
                 ],
-                profileImages: [
-                  'assets/images/user.jpeg',
-                  'assets/images/user.jpeg',
-                  'assets/images/user.jpeg',
-                ],
-                scores: [180, 160, 140],
               ),
             ),
           ],

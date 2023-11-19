@@ -37,11 +37,7 @@ class LoginScreen extends StatelessWidget {
       final String password = passwordController.text;
 
       try {
-        // Call the login method from the UserProvider
         await UserProvider().login(username, password);
-
-        // Navigate to the home or dashboard screen after successful login
-        // Replace '/dashboard' with the actual route for your home/dashboard screen
         Navigator.of(context).pushReplacementNamed('/');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -49,7 +45,6 @@ class LoginScreen extends StatelessWidget {
           ),
         );
       } catch (error) {
-        // Handle login errors (e.g., show a snackbar)
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Login failed. Please check your credentials.'),
