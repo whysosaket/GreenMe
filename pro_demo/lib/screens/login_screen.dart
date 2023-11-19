@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/screens/signup_screen.dart'; // Import the signup screen
+import 'package:pro_demo/providers/user_provider.dart'; // Import the UserProvider
+import 'package:pro_demo/models/user.dart'; // Import the updated User model
+import 'package:pro_demo/screens/signup_screen.dart';
 
 class CreateAccountText extends StatelessWidget {
   @override
@@ -13,7 +15,7 @@ class CreateAccountText extends StatelessWidget {
       child: const Text(
         'Create Account',
         style: TextStyle(
-          color: Colors.green, // Choose your desired color
+          color: Colors.green,
           fontSize: 16,
           decoration: TextDecoration.underline,
         ),
@@ -27,20 +29,41 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    void _login() async {
+      final String username = usernameController.text;
+      final String password = passwordController.text;
+
+      try {
+        // Call the login method from the UserProvider
+        await UserProvider().login(username, password);
+
+        // Navigate to the home or dashboard screen after successful login
+        // Replace '/dashboard' with the actual route for your home/dashboard screen
+        Navigator.of(context).pushReplacementNamed('/');
+      } catch (error) {
+        // Handle login errors (e.g., show a snackbar)
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login failed. Please check your credentials.'),
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(
-              height: 100,
-            ),
+            const SizedBox(height: 100),
             Container(
               height: 300,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
-                      'assets/images/loginimage.png'), // Replace with your image asset
+                  image: AssetImage('assets/images/loginimage.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -55,16 +78,14 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(
-                          200, 50, 180, 20), // Updated text color to white
+                      color: Color.fromARGB(200, 50, 180, 20),
                     ),
                   ),
                   const SizedBox(height: 32),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.8),
-                      borderRadius:
-                          BorderRadius.circular(20), // Increased border radius
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -74,8 +95,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: usernameController,
+                      decoration: const InputDecoration(
                         labelText: 'Username',
                         prefixIcon: Icon(Icons.person),
                         border: InputBorder.none,
@@ -88,8 +110,7 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.8),
-                      borderRadius:
-                          BorderRadius.circular(20), // Increased border radius
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -99,9 +120,10 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const TextField(
+                    child: TextField(
+                      controller: passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         prefixIcon: Icon(Icons.lock),
                         border: InputBorder.none,
@@ -112,15 +134,11 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle login button press
-                      // Add your authentication logic here
-                    },
+                    onPressed: _login,
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20), // Increased border radius
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                     child: Container(
@@ -132,14 +150,14 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Updated text color to white
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  CreateAccountText(), // Display the "Create Account" text
+                  CreateAccountText(),
                 ],
               ),
             ),

@@ -25,13 +25,13 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () async {
-      Provider.of<UserProvider>(context, listen: false).setUser(
-        User(
-          name: 'John Dedoe',
-          image: 'assets/images/user.jpeg',
-          email: 'john.doe@example.com',
-        ),
-      );
+      // Provider.of<UserProvider>(context, listen: false).setUser(
+      //   User(
+      //     name: 'John Dedoe',
+      //     image: 'assets/images/user.jpeg',
+      //     email: 'john.doe@example.com',
+      //   ),
+      // );
     });
     _pages = [
       const ExploreScreen(),

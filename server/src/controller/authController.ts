@@ -71,6 +71,7 @@ const createUser = async (req: Request, res: Response) => {
 const loginUser = async (req: Request, res: Response) => {
   let success = false;
   let { login, password } = req.body;
+  console.log(login, password);
   try {
     let emailCheck = await User.findOne({ email: login });
     let usernameCheck = await User.findOne({ username: login });
