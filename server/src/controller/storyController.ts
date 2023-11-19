@@ -41,14 +41,12 @@ const sendStory = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "Image is required!" });
     }
 
-    const newStory = {
+    const story = await Story.create({
       image,
       caption,
-    };
-    await Story.create({
-      //enter your text here
-    })
-    user.stories.push(newStory);
+      user: id,
+    });
+    user.stories.push(story.id);
     await user.save();
 
     success = true;
@@ -87,14 +85,17 @@ const viewStory = async (req: CustomRequest, res: Response) => {
     }
 
     const following = user.following;
-    const allStories = await User.find({ _id: { $in: following } }).select(
+    const storyIDs = await User.find({ _id: { $in: following } }).select(
       "stories"
     );
 
+    const stories = await Story.find({ _id: { $in: storyIDs } })
+      .sort({ createdAt: -1 })
+      .limit(10);
 
 
     success = true;
-    return res.json({ success, allStories });
+    return res.json({ success, stories });
   } catch (error) {
     console.log(error);
     return res.json({ error: "Something Went Wrong!" });
