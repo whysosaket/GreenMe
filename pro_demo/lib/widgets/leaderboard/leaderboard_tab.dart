@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pro_demo/widgets/leaderboard/leaderboard_card.dart';
 
 class LeaderboardTab extends StatelessWidget {
-  final List<String> names;
-  final List<String> profileImages;
-  final List<int> scores;
+  final List<Map<String, dynamic>> leaderboardData;
 
   const LeaderboardTab({
     Key? key,
-    required this.names,
-    required this.profileImages,
-    required this.scores,
+    required this.leaderboardData,
   }) : super(key: key);
 
   @override
@@ -19,11 +15,13 @@ class LeaderboardTab extends StatelessWidget {
       margin: const EdgeInsets.only(top: 8),
       child: ListView(
         physics: BouncingScrollPhysics(),
-        children: List.generate(names.length, (index) {
+        children: List.generate(leaderboardData.length, (index) {
+          final data = leaderboardData[index];
+          print("ssssasdasda");
           return LeaderboardCard(
-            name: names[index],
-            profileImagePath: profileImages[index],
-            score: scores[index],
+            name: data['name'],
+            profileImagePath: data['profileImage'],
+            score: data['score'],
           );
         }),
       ),
