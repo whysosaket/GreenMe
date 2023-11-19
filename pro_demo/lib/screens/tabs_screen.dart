@@ -38,9 +38,9 @@ class _TabsScreenState extends State<TabsScreen> {
         elevation: 0,
         title: const Text(
           'Green Me',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color.fromARGB(255, 64, 180, 83),
+        backgroundColor: const Color.fromARGB(255, 243, 255, 232),
         actions: <Widget>[
           Container(
             padding: const EdgeInsets.only(right: 15),
@@ -60,9 +60,9 @@ class _TabsScreenState extends State<TabsScreen> {
       body: _pages[_selectedPageIndex] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        backgroundColor: const Color.fromARGB(255, 64, 180, 83),
-        unselectedItemColor: const Color.fromARGB(255, 127, 211, 141),
-        selectedItemColor: const Color.fromARGB(255, 243, 255, 232),
+        backgroundColor: const Color.fromARGB(255, 243, 255, 232),
+        unselectedItemColor: const Color.fromARGB(255, 165, 165, 165),
+        selectedItemColor: const Color.fromARGB(255, 64, 180, 83),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         currentIndex: _selectedPageIndex,
@@ -87,7 +87,7 @@ class _TabsScreenState extends State<TabsScreen> {
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(
               Icons.add_circle,
-              color: Color.fromARGB(255, 247, 247, 247),
+              color: Color.fromARGB(255, 64, 180, 83),
               size: 35,
             ),
             activeIcon: const Icon(
