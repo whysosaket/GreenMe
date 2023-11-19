@@ -3,6 +3,7 @@ import 'package:pro_demo/screens/add_post_screen.dart';
 import 'package:pro_demo/screens/demo_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
+import 'package:pro_demo/screens/profile_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -20,7 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
     super.initState();
     _pages = [
       const ExploreScreen(),
-      const DemoScreen(),
+      const ProfileScreen(),
       const LoginScreen(),
       const AddPostScreen(),
     ];
@@ -47,15 +48,12 @@ class _TabsScreenState extends State<TabsScreen> {
         actions: <Widget>[
           Container(
             padding: const EdgeInsets.only(right: 15),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed('/profile-detail');
-              },
-              child: const CircleAvatar(
-                radius: 18,
-                backgroundColor: Color.fromARGB(255, 127, 211, 141),
-                backgroundImage: null,
+            child: IconButton(
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.black,
               ),
+              onPressed: () {},
             ),
           ),
         ],
