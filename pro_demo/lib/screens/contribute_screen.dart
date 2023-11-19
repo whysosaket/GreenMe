@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/widgets/charts/posts_card.dart';
+import 'package:pro_demo/widgets/contribute_card.dart';
 
-class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
+class ContributeScreen extends StatefulWidget {
+  const ContributeScreen({Key? key}) : super(key: key);
 
   @override
-  _ExploreScreenState createState() => _ExploreScreenState();
+  _ContributeScreenState createState() => _ContributeScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
-  List<String> users = [
-    'sarthak',
-    'aditya',
-    'mike',
-    'saket',
-    'aryan',
-    'milind',
-  ];
+class _ContributeScreenState extends State<ContributeScreen> {
+  List<String> topics = ['Clean City','Save water','Clean River','Say no to Plastic'];
+  List<String> imgs = ['assets/images/clean_city.jpg', 'assets/images/clean_river.jpg', 'assets/images/no_plastic.jpg', 'assets/images/save_water.jpg'];
   List<String> filteredUsers = [];
 
   OverlayEntry? _overlayEntry;
@@ -32,7 +26,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.5),
+                color: const Color.fromARGB(255, 246, 247, 246).withOpacity(0.5),
                 borderRadius: BorderRadius.circular(25),
               ),
               child: TextField(
@@ -40,20 +34,24 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 decoration: const InputDecoration(
                   icon: Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 180, 180, 180),
                   ),
                   hintText: 'Search...',
-                  hintStyle: TextStyle(color: Colors.white70),
+                  hintStyle: TextStyle(color: Color.fromARGB(179, 168, 168, 168)),
                   border: InputBorder.none,
                 ),
                 onChanged: (value) {
                   setState(() {
-                    filteredUsers = users
+                    filteredUsers = topics
                         .where((user) =>
                             user.toLowerCase().contains(value.toLowerCase()))
                         .toList();
                   });
+
+                  // Close existing overlay
                   _removeOverlay();
+
+                  // Show overlay with search results
                   _overlayEntry = _createOverlayEntry();
                   Overlay.of(context).insert(_overlayEntry!);
                 },
@@ -63,9 +61,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
             Expanded(
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: 10, 
+                itemCount: 4, // Display some content (posts) here
                 itemBuilder: (context, index) {
-                  return PostsCard('Username $index');
+                  return ContributeCard(topics[index], imgs[index]);
                 },
               ),
             ),

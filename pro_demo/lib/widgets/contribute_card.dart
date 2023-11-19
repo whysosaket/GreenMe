@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class PostsCard extends StatelessWidget {
+class ContributeCard extends StatefulWidget {
   String username;
-  PostsCard(this.username, {super.key});
+  String imgAddres;
+  ContributeCard(this.username, this.imgAddres, {super.key});
 
+  @override
+  State<ContributeCard> createState() => _ContributeCardState();
+  var favorite = false;
+}
+
+class _ContributeCardState extends State<ContributeCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,7 +23,7 @@ class PostsCard extends StatelessWidget {
             // Top Bar
             Container(
               padding: const EdgeInsets.all(8),
-              color: Colors.green.withOpacity(0.7),
+              color: const Color.fromARGB(255, 48, 137, 50).withOpacity(0.7),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -30,7 +37,7 @@ class PostsCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        username,
+                        widget.username,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -47,11 +54,11 @@ class PostsCard extends StatelessWidget {
             ),
             // Image Box
             Container(
-              width: double.infinity,
+              width: 300,
               height: 200,
               color: Colors.grey,
-              child: Image.network(
-                'https://placehold.co/150/png',
+              child: Image.asset(
+                widget.imgAddres,
                 fit: BoxFit.cover,
               ),
             ),
@@ -62,17 +69,36 @@ class PostsCard extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.favorite_border),
+                      icon: Icon(
+                        widget.favorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: widget.favorite ? Colors.red : Colors.grey,
+                      ),
                       onPressed: () {
-                        // Handle like button press
+                        setState(() {
+                          widget.favorite = !widget.favorite;
+                        });
                       },
                     ),
                   ],
                 ),
                 Row(
                   children: [
+                    const Text(
+                      'Fund it!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
                     IconButton(
-                      icon: const Icon(Icons.share),
+                      icon: const Icon(
+                        Icons.monetization_on,
+                        size: 30,
+                        color: Colors.green,
+                      ),
                       onPressed: () {
                         // Handle share button press
                       },

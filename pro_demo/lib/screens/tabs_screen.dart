@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/add_post_screen.dart';
+import 'package:pro_demo/screens/contribute_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
 import 'package:pro_demo/screens/leaderboard_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
@@ -29,7 +30,7 @@ class _TabsScreenState extends State<TabsScreen> {
     _pages = [
       const ExploreScreen(),
       const ProfileScreen(),
-      const LeaderboardScreen(),
+      const ContributeScreen(),
       const AddPostScreen(),
     ];
   }
