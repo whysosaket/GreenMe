@@ -9,7 +9,16 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  List<String> users = ['user1', 'user2', 'user3', 'user4', 'user5'];
+  List<String> users = [
+    'user1',
+    'user2',
+    'user3',
+    'user4',
+    'user5',
+    'saket',
+    'aryan',
+    'milind',
+  ];
   List<String> filteredUsers = [];
 
   OverlayEntry? _overlayEntry;
