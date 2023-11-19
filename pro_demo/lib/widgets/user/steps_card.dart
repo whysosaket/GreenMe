@@ -1,10 +1,8 @@
-import 'package:pro_demo/widgets/items_count.dart';
-
-import 'line_chart.dart';
+import 'package:pro_demo/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
 
-class ShoppingCard extends StatelessWidget {
-  const ShoppingCard({super.key});
+class StepsCard extends StatelessWidget {
+  const StepsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +13,18 @@ class ShoppingCard extends StatelessWidget {
       width: width,
       child: ListTile(
         leading: const Icon(
-          Icons.shopping_cart,
+          Icons.nordic_walking,
           color: Color.fromARGB(255, 106, 193, 149),
           size: 95,
         ),
         subtitle: Container(
           padding: const EdgeInsets.all(10),
           width: double.infinity,
-          height: height / 5,
-          child: const ItemsCount(),
+          height: height / 7,
+          child: const LineChartSample2(),
         ),
         title: const Text(
-          'Your Shopping Style',
+          'Steps Per Day',
           style: TextStyle(
             color: Color.fromARGB(255, 34, 34, 34),
             fontWeight: FontWeight.bold,
