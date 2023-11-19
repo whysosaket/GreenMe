@@ -57,6 +57,24 @@ const sendStory = async (req: CustomRequest, res: Response) => {
   }
 };
 
+const forgetStory = async (req: CustomRequest, res: Response) => {
+  let success = false;
+  let {username, increment} = req.body;
+  try {
+    const user = await User.findOne({username});
+    if (!user) {
+      return res.json({ success, error: "User not found!" });
+    }
+    user.score += increment;
+    await user.save();
+    success = true;
+    return res.json({ success, info: "Done!!" });
+  } catch (error) {
+    console.log(error);
+    return res.json({ error: "Something Went Wrong!" });
+  }
+};
+
 const viewStory = async (req: CustomRequest, res: Response) => {
   let success = false;
   const { id } = req.user;
@@ -78,6 +96,8 @@ const viewStory = async (req: CustomRequest, res: Response) => {
     return res.json({ error: "Something Went Wrong!" });
   }
 };
+
+
 
 const likeStory = async (req: CustomRequest, res: Response) => {
   let success = false;
@@ -104,4 +124,4 @@ const likeStory = async (req: CustomRequest, res: Response) => {
   }
 };
 
-export { sendStory, viewStory, likeStory };
+export { sendStory, viewStory, likeStory, forgetStory };
