@@ -45,7 +45,9 @@ const sendStory = async (req: CustomRequest, res: Response) => {
       image,
       caption,
     };
-
+    await Story.create({
+      //enter your text here
+    })
     user.stories.push(newStory);
     await user.save();
 
@@ -88,6 +90,8 @@ const viewStory = async (req: CustomRequest, res: Response) => {
     const allStories = await User.find({ _id: { $in: following } }).select(
       "stories"
     );
+
+
 
     success = true;
     return res.json({ success, allStories });

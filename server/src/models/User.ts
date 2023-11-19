@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
   },
   anonymousID: {
     type: String,
-    required: true,
+    
     min: 6,
     max: 255,
   },

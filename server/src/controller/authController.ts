@@ -45,18 +45,26 @@ const createUser = async (req: Request, res: Response) => {
 
     const securedPassword = await bcrypt.hash(password.toString(), 10);
 
-    const newUser = new User({
+    const newUser = await User.create({
       name,
       email,
       username,
       password: securedPassword
     });
+    const data={
+      user:{
+          id:newUser.id
+      }
+    }
+  const authToken = jwt.sign(data, JWT_SECRET);
 
     success = true;
+    console.log(authToken)
     return res.json({ success, info: "Account Created Successfully!!" });
   } catch (error) {
     console.log(error);
     return res.json({ error: "Something Went Wrong!" });
+    
   }
 };
 
