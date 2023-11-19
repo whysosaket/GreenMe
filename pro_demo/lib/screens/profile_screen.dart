@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_demo/widgets/badges/badge_card.dart';
 import 'package:pro_demo/widgets/user/shopping_card.dart';
 import 'package:pro_demo/widgets/user/steps_card.dart';
 import 'package:pro_demo/widgets/user/user_card.dart';
@@ -8,18 +9,15 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 243, 255, 232),
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: const Column(
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 243, 255, 232),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             UserCard(),
             StepsCard(),
             ShoppingCard(),
+            BadgesCard(),
           ],
         ),
       ),

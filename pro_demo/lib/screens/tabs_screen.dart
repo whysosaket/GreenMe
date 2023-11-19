@@ -27,7 +27,7 @@ class _TabsScreenState extends State<TabsScreen> {
     Future.delayed(Duration.zero, () async {
       Provider.of<UserProvider>(context, listen: false).setUser(
         User(
-          name: 'John Dedoe',
+          name: 'John Doe',
           image: 'assets/images/user.jpeg',
           email: 'john.doe@example.com',
         ),

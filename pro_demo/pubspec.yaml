@@ -67,9 +67,11 @@ flutter:
     - assets/images/signupimage.png
     - assets/images/leaderboard.png
     - assets/images/user.jpeg
+    - assets/images/badge1.jpeg
+    - assets/images/badge2.jpeg
     - assets/images/globe_green.svg
-    - assets/images/globe_yellow.svg
     - assets/images/globe_red.svg
+    - assets/images/globe_yellow.svg
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

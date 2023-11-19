@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/widgets/posts_card.dart';
+import 'package:pro_demo/widgets/charts/posts_card.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -10,11 +10,9 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen> {
   List<String> users = [
-    'user1',
-    'user2',
-    'user3',
-    'user4',
-    'user5',
+    'sarthak',
+    'aditya',
+    'mike',
     'saket',
     'aryan',
     'milind',
@@ -55,11 +53,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             user.toLowerCase().contains(value.toLowerCase()))
                         .toList();
                   });
-
-                  // Close existing overlay
                   _removeOverlay();
-
-                  // Show overlay with search results
                   _overlayEntry = _createOverlayEntry();
                   Overlay.of(context).insert(_overlayEntry!);
                 },
@@ -69,7 +63,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             Expanded(
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: 10, // Display some content (posts) here
+                itemCount: 10, 
                 itemBuilder: (context, index) {
                   return PostsCard('Username $index');
                 },

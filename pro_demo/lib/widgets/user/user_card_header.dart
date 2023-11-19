@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/user_provider.dart';
+import 'package:pro_demo/screens/notifications_screen.dart';
 import 'package:provider/provider.dart';
 
 class UserCardHeader extends StatelessWidget {
@@ -36,11 +37,14 @@ class UserCardHeader extends StatelessWidget {
             fontSize: 12,
           ),
         ),
-        trailing: const CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 237, 255, 220),
+        trailing: CircleAvatar(
+          backgroundColor: const Color.fromARGB(255, 237, 255, 220),
           child: IconButton(
-            onPressed: null,
-            icon: Icon(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const NotificationsScreen()));
+            },
+            icon: const Icon(
               Icons.notifications,
               color: Color.fromARGB(255, 34, 34, 34),
             ),

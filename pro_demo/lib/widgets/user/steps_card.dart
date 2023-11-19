@@ -1,4 +1,4 @@
-import 'package:pro_demo/widgets/line_chart.dart';
+import 'package:pro_demo/widgets/charts/line_chart.dart';
 import 'package:flutter/material.dart';
 
 class StepsCard extends StatelessWidget {
