@@ -58,4 +58,20 @@ const viewOther = async (req: Request, res: Response) => {
     }
 }
 
-export { viewSelf, viewOther };
+const getScore = async (req: CustomRequest, res: Response) => {
+    const id = "6559aaa33c3621df5379d7b7";
+    let success = false;
+    try{
+        const user = await User.findById(id);
+        if(!user){
+            return res.json({success, error: "User not found!"});
+        }
+        success = true;
+        return res.json({success, score: user.score});
+    } catch (error) {
+        console.log(error);
+        return res.json({ error: "Something Went Wrong!" });
+    }
+}
+
+export { viewSelf, viewOther, getScore };
