@@ -15,7 +15,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> login(String username, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:9000/api/auth/login'),
+        Uri.parse('https://trithon-application.vercel.app/api/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },

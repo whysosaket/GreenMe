@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PostsCard extends StatefulWidget {
   String username;
-  PostsCard(this.username, {super.key});
+  String images;
+  PostsCard(this.username, this.images, {super.key});
 
   @override
   State<PostsCard> createState() => _PostsCardState();
@@ -11,6 +14,27 @@ class PostsCard extends StatefulWidget {
 }
 
 class _PostsCardState extends State<PostsCard> {
+  var _likes = 0;
+
+  // set likes to a random number between 0 and 100
+  @override
+  void initState() {
+    super.initState();
+    _likes = Random().nextInt(100);
+  }
+
+  void _increaseLikes() {
+    setState(() {
+      _likes++;
+    });
+  }
+
+  void _decreaseLikes() {
+    setState(() {
+      _likes--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,8 +55,9 @@ class _PostsCardState extends State<PostsCard> {
                       const CircleAvatar(
                         radius: 16,
                         backgroundImage: NetworkImage(
-                          'https://placehold.co/50/png',
+                          'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Images.png',
                         ),
+                        backgroundColor: Colors.white,
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -57,7 +82,7 @@ class _PostsCardState extends State<PostsCard> {
               height: 200,
               color: Colors.grey,
               child: Image.network(
-                'https://placehold.co/150/png',
+                widget.images,
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,11 +100,17 @@ class _PostsCardState extends State<PostsCard> {
                         color: widget.favorite ? Colors.red : Colors.grey,
                       ),
                       onPressed: () {
+                        if (widget.favorite) {
+                          _decreaseLikes();
+                        } else {
+                          _increaseLikes();
+                        }
                         setState(() {
                           widget.favorite = !widget.favorite;
                         });
                       },
                     ),
+                    Text(_likes.toString()),
                   ],
                 ),
                 Row(

@@ -12,7 +12,8 @@ class LeaderboardProvider extends ChangeNotifier {
   Future<Leaderboard> getGlobal() async {
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:9000/api/leaderboard/global'),
+        Uri.parse(
+            'https://trithon-application.vercel.app/api/leaderboard/global'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
