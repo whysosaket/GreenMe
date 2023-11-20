@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/leaderboard_provider.dart';
+import 'package:pro_demo/providers/score_provider.dart';
 import 'package:pro_demo/providers/user_provider.dart';
 import 'package:pro_demo/screens/tabs_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
@@ -16,6 +17,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => LeaderboardProvider()),
+        ChangeNotifierProvider(create: (context) => ScoreProvider()),
       ],
       child: MyApp(),
     ),
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Green Me',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

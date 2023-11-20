@@ -59,7 +59,7 @@ class _BuyingHistoryScreenState extends State<BuyingHistoryScreen> {
                 SmsQueryKind.sent,
               ],
               // address: '+254712345789',
-              count: 10,
+              count: 1000,
             );
             debugPrint('sms inbox messages: ${messages.length}');
 
