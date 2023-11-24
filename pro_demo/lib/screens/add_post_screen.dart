@@ -81,6 +81,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
     }
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 243, 255, 232),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 243, 255, 232),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text('Add Post'),
+      ),
       body: Stack(
         children: [
           CameraPreview(_cameraController),

@@ -1,46 +1,57 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:pro_demo/screens/full_screen_post.dart';
+import 'package:share/share.dart';
 
-// ignore: must_be_immutable
 class PostsCard extends StatefulWidget {
-  String username;
-  String images;
-  PostsCard(this.username, this.images, {super.key});
+  final String username;
+  final String images;
+  bool favorite;
+  int likes;
+
+  PostsCard(this.username, this.images, this.favorite, this.likes, {Key? key})
+      : super(key: key);
 
   @override
   State<PostsCard> createState() => _PostsCardState();
-  var favorite = false;
 }
 
 class _PostsCardState extends State<PostsCard> {
-  var _likes = 0;
-
-  // set likes to a random number between 0 and 100
-  @override
-  void initState() {
-    super.initState();
-    _likes = Random().nextInt(100);
-  }
-
-  void _increaseLikes() {
+  void _toggleFavorite() {
     setState(() {
-      _likes++;
+      if (widget.favorite) {
+        widget.likes--;
+      } else {
+        widget.likes++;
+      }
+      widget.favorite = !widget.favorite;
     });
   }
 
-  void _decreaseLikes() {
-    setState(() {
-      _likes--;
-    });
+  void _shareImage() {
+    Share.share(
+        'Check out this image from ${widget.username}: ${widget.images}');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FullScreenPost(
+              username: widget.username,
+              image: widget.images,
+              likes: widget.likes,
+              toggleFavorite: _toggleFavorite,
+              isFavorite: widget.favorite,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         child: Column(
           children: [
             // Top Bar
@@ -77,13 +88,16 @@ class _PostsCardState extends State<PostsCard> {
               ),
             ),
             // Image Box
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: Colors.grey,
-              child: Image.network(
-                widget.images,
-                fit: BoxFit.cover,
+            Hero(
+              tag: widget.images, // Unique tag for the Hero animation
+              child: Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.grey,
+                child: Image.network(
+                  widget.images,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             // Like and Share Buttons
@@ -99,18 +113,9 @@ class _PostsCardState extends State<PostsCard> {
                             : Icons.favorite_border,
                         color: widget.favorite ? Colors.red : Colors.grey,
                       ),
-                      onPressed: () {
-                        if (widget.favorite) {
-                          _decreaseLikes();
-                        } else {
-                          _increaseLikes();
-                        }
-                        setState(() {
-                          widget.favorite = !widget.favorite;
-                        });
-                      },
+                      onPressed: _toggleFavorite,
                     ),
-                    Text(_likes.toString()),
+                    Text(widget.likes.toString()),
                   ],
                 ),
                 Row(
@@ -118,7 +123,7 @@ class _PostsCardState extends State<PostsCard> {
                     IconButton(
                       icon: const Icon(Icons.share),
                       onPressed: () {
-                        // Handle share button press
+                        _shareImage();
                       },
                     ),
                   ],

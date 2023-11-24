@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pro_demo/models/user.dart';
 import 'package:pro_demo/providers/user_provider.dart';
-import 'package:pro_demo/screens/add_post_screen.dart';
 import 'package:pro_demo/screens/contribute_screen.dart';
 import 'package:pro_demo/screens/explore_screen.dart';
+import 'package:pro_demo/screens/home_screen.dart';
 import 'package:pro_demo/screens/leaderboard_screen.dart';
 import 'package:pro_demo/screens/login_screen.dart';
 import 'package:pro_demo/screens/profile_screen.dart';
+import 'package:pro_demo/widgets/search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -28,10 +29,10 @@ class _TabsScreenState extends State<TabsScreen> {
       await _loadUserData();
     });
     _pages = [
+      const HomeScreen(),
       const ExploreScreen(),
-      const ProfileScreen(),
       const ContributeScreen(),
-      const AddPostScreen(),
+      const ProfileScreen(),
     ];
   }
 
@@ -61,6 +62,7 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 243, 255, 232),
       appBar: AppBar(
         elevation: 0,
         title: const Text(
@@ -79,7 +81,8 @@ class _TabsScreenState extends State<TabsScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LeaderboardScreen()),
                 );
               },
             ),
@@ -101,7 +104,12 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ],
       ),
-      body: _pages[_selectedPageIndex] as Widget,
+      body: Column(
+        children: [
+          const SearchWidget(),
+          Expanded(child: _pages[_selectedPageIndex] as Widget),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         backgroundColor: const Color.fromARGB(255, 243, 255, 232),
@@ -114,32 +122,23 @@ class _TabsScreenState extends State<TabsScreen> {
         items: [
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.category),
+            icon: const Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.search),
             label: 'Explore',
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.person_2),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(Icons.confirmation_number_outlined),
             label: 'Contribute',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(
-              Icons.add_circle,
-              color: Color.fromARGB(255, 64, 180, 83),
-              size: 35,
-            ),
-            activeIcon: const Icon(
-              Icons.edit_note,
-              size: 35,
-            ),
-            label: 'Add post',
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.person_2),
+              label: 'Profile'),
         ],
       ),
     );

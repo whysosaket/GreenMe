@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pro_demo/widgets/badges/badge_card.dart';
 import 'package:pro_demo/widgets/user/shopping_card.dart';
-import 'package:pro_demo/widgets/user/steps_card.dart';
 import 'package:pro_demo/widgets/user/user_card.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -15,9 +14,8 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             UserCard(),
-            StepsCard(),
-            ShoppingCard(),
             BadgesCard(),
+            ShoppingCard(),
           ],
         ),
       ),

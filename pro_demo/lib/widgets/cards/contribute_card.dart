@@ -15,7 +15,7 @@ class _ContributeCardState extends State<ContributeCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Column(
@@ -23,7 +23,7 @@ class _ContributeCardState extends State<ContributeCard> {
             // Top Bar
             Container(
               padding: const EdgeInsets.all(8),
-              color: const Color.fromARGB(255, 48, 137, 50).withOpacity(0.7),
+              color: Colors.green.withOpacity(0.7),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/widgets/contribute_card.dart';
+import 'package:pro_demo/widgets/cards/contribute_card.dart';
 
 class ContributeScreen extends StatefulWidget {
   const ContributeScreen({Key? key}) : super(key: key);
@@ -9,8 +9,18 @@ class ContributeScreen extends StatefulWidget {
 }
 
 class _ContributeScreenState extends State<ContributeScreen> {
-  List<String> topics = ['Clean City','Save water','Clean River','Say no to Plastic'];
-  List<String> imgs = ['assets/images/clean_city.jpg', 'assets/images/clean_river.jpg', 'assets/images/no_plastic.jpg', 'assets/images/save_water.jpg'];
+  List<String> topics = [
+    'Clean City',
+    'Save water',
+    'Clean River',
+    'Say no to Plastic'
+  ];
+  List<String> imgs = [
+    'assets/images/clean_city.jpg',
+    'assets/images/clean_river.jpg',
+    'assets/images/no_plastic.jpg',
+    'assets/images/save_water.jpg'
+  ];
   List<String> filteredUsers = [];
 
   OverlayEntry? _overlayEntry;
@@ -20,54 +30,13 @@ class _ContributeScreenState extends State<ContributeScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 243, 255, 232),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 246, 247, 246).withOpacity(0.5),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  icon: Icon(
-                    Icons.search,
-                    color: Color.fromARGB(255, 180, 180, 180),
-                  ),
-                  hintText: 'Search...',
-                  hintStyle: TextStyle(color: Color.fromARGB(179, 168, 168, 168)),
-                  border: InputBorder.none,
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    filteredUsers = topics
-                        .where((user) =>
-                            user.toLowerCase().contains(value.toLowerCase()))
-                        .toList();
-                  });
-
-                  // Close existing overlay
-                  _removeOverlay();
-
-                  // Show overlay with search results
-                  _overlayEntry = _createOverlayEntry();
-                  Overlay.of(context).insert(_overlayEntry!);
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: 4, // Display some content (posts) here
-                itemBuilder: (context, index) {
-                  return ContributeCard(topics[index], imgs[index]);
-                },
-              ),
-            ),
-          ],
+        padding: const EdgeInsets.all(12.0),
+        child: ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: 4, // Display some content (posts) here
+          itemBuilder: (context, index) {
+            return ContributeCard(topics[index], imgs[index]);
+          },
         ),
       ),
     );
