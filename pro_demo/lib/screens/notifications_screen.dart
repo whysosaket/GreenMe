@@ -8,6 +8,15 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
+  // Sample notification messages
+  final List<String> sampleNotifications = [
+    'You have a new follower!',
+    'Someone liked your post.',
+    'Your contribution has been approved.',
+    'New event notification.',
+    'Check out the latest updates!'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +42,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 243, 255, 232),
         ),
-        child: const Column(
+        child: Column(
           children: [
             Expanded(
-              child: Notifications(),
+              child: Notifications(
+                notificationMessages: sampleNotifications,
+              ),
             ),
           ],
         ),

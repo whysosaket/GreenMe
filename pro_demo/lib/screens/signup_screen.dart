@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:pro_demo/screens/login_screen.dart'; // Import the login screen
 
 class LoginText extends StatelessWidget {
-  const LoginText({super.key});
+  const LoginText({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-        );
+        Navigator.pop(context);
       },
       child: const Text(
         'Already have an account? Login',
         style: TextStyle(
-          color: Colors.blue, // Choose your desired color
+          color: Colors.green,
           fontSize: 16,
           decoration: TextDecoration.underline,
         ),

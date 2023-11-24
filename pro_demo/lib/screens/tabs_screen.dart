@@ -106,7 +106,7 @@ class _TabsScreenState extends State<TabsScreen> {
       ),
       body: Column(
         children: [
-          const SearchWidget(),
+          if (_selectedPageIndex != 3) const SearchWidget(),
           Expanded(child: _pages[_selectedPageIndex] as Widget),
         ],
       ),
